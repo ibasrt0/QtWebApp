@@ -341,6 +341,11 @@ const QByteArray& HttpRequest::getRawPath() const
 	return path;
 }
 
+void HttpRequest::setRawPath(QByteArray& newPath)
+{
+	path=newPath;
+}
+
 
 QByteArray HttpRequest::getVersion() const
 {
