@@ -2,17 +2,32 @@
 
 using namespace qtwebapp;
 
+void HttpServerConfig::initdefaults()
+{
+	host = QHostAddress::Any;
+	port = 0;
+	maxRequestSize = 16e3;
+	maxMultipartSize = 1e6;
+	readTimeout = 1e4;
+	cleanupInterval = 1e3;
+	minThreads = 1;
+	maxThreads = 100;
+}
+
 HttpServerConfig::HttpServerConfig()
 {
+	initdefaults();
 }
 
 HttpServerConfig::HttpServerConfig(const QSettings &settings)
 {
+	initdefaults();
 	parseSettings(settings);
 }
 
 HttpServerConfig::HttpServerConfig(QSettings *settings)
 {
+	initdefaults();
 	parseSettings(*settings);
 }
 
@@ -41,17 +56,27 @@ void HttpServerConfig::parseSettings(const QSettings &settings)
 
 // ###########################################################################################
 
+void HttpSessionStoreConfig::initdefaults()
+{
+	expirationTime = 3600e3;
+	cookieName = "sessionid";
+	cookiePath = "/";
+}
+
 HttpSessionStoreConfig::HttpSessionStoreConfig()
 {
+	initdefaults();
 }
 
 HttpSessionStoreConfig::HttpSessionStoreConfig(const QSettings &settings)
 {
+	initdefaults();
 	parseSettings(settings);
 }
 
 HttpSessionStoreConfig::HttpSessionStoreConfig(QSettings *settings)
 {
+	initdefaults();
 	parseSettings(*settings);
 }
 
@@ -67,17 +92,30 @@ void HttpSessionStoreConfig::parseSettings(const QSettings &settings)
 
 // ###########################################################################################
 
+void StaticFileControllerConfig::initdefaults()
+{
+	path = ".";
+	encoding = "UTF-8";
+	maxAge = 6e4;
+	maxCachedFileSize = 2<<15;
+	cacheSize = 1e6;
+	cacheTime = 6e4;
+}
+
 StaticFileControllerConfig::StaticFileControllerConfig()
 {
+	initdefaults();
 }
 
 StaticFileControllerConfig::StaticFileControllerConfig(const QSettings &settings)
 {
+	initdefaults();
 	parseSettings(settings);
 }
 
 StaticFileControllerConfig::StaticFileControllerConfig(QSettings *settings)
 {
+	initdefaults();
 	parseSettings(*settings);
 }
 

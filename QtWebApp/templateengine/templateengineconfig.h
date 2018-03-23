@@ -27,20 +27,21 @@ public:
 	
 	/// The path where the static files can be found. This can be either an
 	/// absolute or relativ path or an qt resource path.
-	QString path = ".";
+	QString path;
 	
 	/// The default suffix of the template files.
-	QString suffix = ".tpl";
+	QString suffix;
 	
 	/// The encoding that is sent to the web browser in case of text files.
 	QString encoding;
 	
 	/// The size of the server cache.
-	int cacheSize = 1e6;
+	int cacheSize;
 	/// The timeout of each file in the servers cache.
-	int cacheTime = 6e4;
+	int cacheTime;
 	
 private:
+	void initdefaults();
 	void parseSettings(const QSettings &settings);
 	
 	/// The filename of the settings if read from a file. It is used to resolve

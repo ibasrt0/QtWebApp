@@ -28,29 +28,30 @@ public:
 	HttpServerConfig(QSettings *settings);
 	
 	/// The address for the server to listen on.
-	QHostAddress host = QHostAddress::Any;
+	QHostAddress host;
 	/// The port for the server to listen on.
-	quint16 port = 0;
+	quint16 port;
 	
 	/// The maximum size of an HTTP request.
-	int maxRequestSize = 16e3;
+	int maxRequestSize;
 	/// The maximum size of a body of a multipart/form-data request.
-	int maxMultipartSize = 1e6;
+	int maxMultipartSize;
 	
 	/// The maximum amount of time to wait for an HTTP request to complete.
-	int readTimeout = 1e4;
+	int readTimeout;
 	
 	/// The interval to search for idle connection handlers and kill them.
-	int cleanupInterval = 1e3;
+	int cleanupInterval;
 	/// The minimum of idle connection handlers to keep.
-	int minThreads = 1;
+	int minThreads;
 	/// The maximum amount of connection handlers.
-	int maxThreads = 100;
+	int maxThreads;
 	
 	/// The file required for SSL support.
 	QString sslKeyFile, sslCertFile;
 	
 private:
+	void initdefaults();
 	void parseSettings(const QSettings &settings);
 	
 	/// The filename of the settings if read from a file. It is used to resolve
@@ -75,20 +76,21 @@ public:
 	HttpSessionStoreConfig(QSettings *settings);
 	
 	/// The expiration time of the cookie.
-	quint64 expirationTime = 3600e3;
+	quint64 expirationTime;
 	/// The name of the cookie.
-	QByteArray cookieName = "sessionid";
+	QByteArray cookieName;
 	
 	/// The url path where the session is valid. This is usefull when you have
 	/// data not related to the session in `/static/` and session related data in
 	/// `/content/` or similar.
-	QByteArray cookiePath = "/";
+	QByteArray cookiePath;
 	/// The comment of the cookie.
 	QByteArray cookieComment;
 	/// The domain of the cookie.
 	QByteArray cookieDomain;
 	
 private:
+	void initdefaults();
 	void parseSettings(const QSettings &settings);
 };
 
@@ -112,23 +114,24 @@ public:
 	
 	/// The path where the static files can be found. This can be either an
 	/// absolute or relativ path or an qt resource path.
-	QString path = ".";
+	QString path;
 	
 	/// The encoding that is sent to the web browser in case of text files.
-	QString encoding = "UTF-8";
+	QString encoding;
 	
 	/// The amount of time the file should reside in the browsers cache.
-	int maxAge = 6e4;
+	int maxAge;
 	
 	/// The maximum size of a file to get cached.
-	int maxCachedFileSize = 2<<15;
+	int maxCachedFileSize;
 	
 	/// The size of the server cache.
-	int cacheSize = 1e6;
+	int cacheSize;
 	/// The timeout of each file in the servers cache.
-	int cacheTime = 6e4;
+	int cacheTime;
 	
 private:
+	void initdefaults();
 	void parseSettings(const QSettings &settings);
 	
 	/// The filename of the settings if read from a file. It is used to resolve

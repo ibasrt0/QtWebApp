@@ -2,17 +2,28 @@
 
 using namespace qtwebapp;
 
+void TemplateEngineConfig::initdefaults()
+{
+	path = ".";
+	suffix = ".tpl";
+	cacheSize = 1e6;
+	cacheTime = 6e4;
+}
+
 TemplateEngineConfig::TemplateEngineConfig()
 {
+	initdefaults();
 }
 
 TemplateEngineConfig::TemplateEngineConfig(const QSettings &settings)
 {
+	initdefaults();
 	parseSettings(settings);
 }
 
 TemplateEngineConfig::TemplateEngineConfig(QSettings *settings)
 {
+	initdefaults();
 	parseSettings(*settings);
 }
 
