@@ -16,7 +16,11 @@ target_include_directories(QtWebAppTemplateEngine PUBLIC
 	$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
 	$<INSTALL_INTERFACE:include/qtwebapp/templateengine>
 )
-target_link_libraries(QtWebAppTemplateEngine QtWebAppGlobal Qt5::Core Qt5::Network)
+if (Qt5_FOUND)
+    target_link_libraries(QtWebAppTemplateEngine QtWebAppGlobal Qt5::Core Qt5::Network)
+else()
+    target_link_libraries(QtWebAppTemplateEngine QtWebAppGlobal Qt4::QtCore Qt4::QtNetwork)
+endif()
 set_target_properties(QtWebAppTemplateEngine PROPERTIES
 		VERSION ${qtwebapp_VERSION}
 		SOVERSION ${qtwebapp_MAJOR}
